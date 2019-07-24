@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint \"**/*.js\"",
-    "lint:fix": "prettier-eslint \"**/*.js\" --write"
+    "lint": "npx eslint \"**/*.js\"",
+    "lint:fix": "npx prettier-eslint \"**/*.js\" --write"
   },
   "husky": {
     "hooks": {
@@ -14,10 +14,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "npm run lint:fix",
-      "git add"
-    ]
+    "*.js": [ "npm run lint:fix", "git add" ]
   },
   "repository": {
     "type": "git",
