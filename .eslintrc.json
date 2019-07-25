@@ -4,7 +4,10 @@
         "es6": true
     },
     "extends": [
-        "standard"
+        "standard",
+        "plugin:prettier/recommended",
+        "prettier",
+        "prettier/standard"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -14,6 +17,11 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
+    "plugins": [
+      "prettier",
+      "standard"
+    ],
     "rules": {
+      "prettier/prettier": ["error", { "singleQuote": true }]
     }
 }
