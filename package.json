@@ -27,7 +27,14 @@
     }
   },
   "lint-staged": {
-    "*.{js,md,html}": ["npm run prettier:json","npm run lint:fix","git add"]
+    "*.json": [
+      "npm run prettier:json",
+      "git add"
+    ],
+    "*.{js,md,html}": [
+      "npm run lint:fix",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
