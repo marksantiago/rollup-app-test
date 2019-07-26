@@ -6,7 +6,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint . --ext .js,.html",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "build:dev": "rollup -c",
+    "build:prod": "rollup -c --environment INCLUDE_DEPS,BUILD:production",
+    "build:dist": "copyfiles -u 1 \"src/**/*.html\" dist",
+    "browsersync": "browser-sync start --server dist --files dist",
+    "serve": "run-s build:dist browsersync",
+    "watch:dev": "npm run build:dev -- -w",
+    "watch:prod": "npm run build:prod -- -w",
+    "predev": "rimraf dist",
+    "dev": "run-p serve watch:dev",
+    "preprod": "rimraf dist",
+    "prod": "run-p serve build:prod"
   },
   "husky": {
     "hooks": {
@@ -15,10 +26,6 @@
   },
   "lint-staged": {
     "*.{js,css,md,html}": [
-      "npx prettier --write",
-      "git add"
-    ],
-    "*.js": [
       "npm run lint:fix",
       "git add"
     ]
@@ -35,6 +42,8 @@
   },
   "homepage": "https://github.com/marksantiago/rollup-app-test#readme",
   "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "copyfiles": "^2.1.1",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-standard": "^13.0.1",
@@ -46,6 +55,15 @@
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^3.0.1",
     "lint-staged": "^9.2.0",
-    "prettier": "1.18.2"
+    "npm-run-all": "^4.1.5",
+    "prettier": "1.18.2",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.17.0",
+    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.1"
+  },
+  "dependencies": {
+    "date-fns": "^1.30.1"
   }
 }
