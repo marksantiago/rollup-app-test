@@ -5,18 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "npx eslint . --ext .js,.html",
+    "lint": "eslint . --ext .js,.md,.html",
     "lint:fix": "npm run lint -- --fix",
     "build:dev": "rollup -c",
     "build:prod": "rollup -c --environment INCLUDE_DEPS,BUILD:production",
+    "watch:dev": "npm run build:dev -- -w",
+    "watch:prod": "npm run build:prod -- -w",
     "build:dist": "copyfiles -u 1 \"src/**/*.html\" dist",
     "browsersync": "browser-sync start --server dist --files dist",
     "serve": "run-s build:dist browsersync",
-    "watch:dev": "npm run build:dev -- -w",
-    "watch:prod": "npm run build:prod -- -w",
-    "predev": "rimraf dist",
+    "clean:dist": "rimraf dist",
+    "predev": "npm run clean:dist",
     "dev": "run-p serve watch:dev",
-    "preprod": "rimraf dist",
+    "preprod": "npm run clean:dist",
     "prod": "run-p serve build:prod"
   },
   "husky": {
@@ -25,7 +26,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,css,md,html}": [
+    "*.{js,md,html}": [
       "npm run lint:fix",
       "git add"
     ]
@@ -49,6 +50,7 @@
     "eslint-config-standard": "^13.0.1",
     "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-markdown": "^1.0.0",
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-promise": "^4.2.1",
@@ -56,11 +58,15 @@
     "husky": "^3.0.1",
     "lint-staged": "^9.2.0",
     "npm-run-all": "^4.1.5",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-preset-env": "^6.7.0",
+    "precss": "^4.0.0",
     "prettier": "1.18.2",
     "rimraf": "^2.6.3",
     "rollup": "^1.17.0",
     "rollup-plugin-commonjs": "^10.0.1",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-terser": "^5.1.1"
   },
   "dependencies": {

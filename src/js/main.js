@@ -1,3 +1,4 @@
+import '../css/main.css';
 import update from './update.js';
 
 // even though Rollup is bundling all your files together, errors and

@@ -18,11 +18,28 @@
         "sourceType": "module"
     },
     "plugins": [
+      "markdown",
       "html",
       "prettier",
       "standard"
     ],
     "rules": {
       "prettier/prettier": ["error", { "singleQuote": true }]
-    }
+    },
+    "overrides": [{
+      "files": ["**/*.md"],
+      "parserOptions": {
+        "ecmaFeatures": {
+          "impliedStrict": true
+        }
+      },
+      "rules": {
+        "strict": "off",
+        "quotes": ["error", "single"],
+        "no-undef": "off",
+        "no-unused-vars": "off",
+        "no-console": "off",
+        "padded-blocks": "off"
+      }
+    }]
 }
