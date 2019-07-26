@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier:json": "prettier --write \"**/*.json\"",
     "lint": "eslint . --ext .js,.md,.html",
     "lint:fix": "npm run lint -- --fix",
     "build:dev": "rollup -c",
@@ -26,10 +27,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,md,html}": [
-      "npm run lint:fix",
-      "git add"
-    ]
+    "*.{js,md,html}": ["npm run prettier:json","npm run lint:fix","git add"]
   },
   "repository": {
     "type": "git",
