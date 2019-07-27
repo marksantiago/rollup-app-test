@@ -8,6 +8,8 @@ import postcss from 'rollup-plugin-postcss';
 import postcssEasyImport from 'postcss-easy-import';
 import precss from 'precss';
 import postcssPresetEnv from 'postcss-preset-env';
+import syntax from 'postcss-scss';
+import stripInlineComments from 'postcss-strip-inline-comments';
 
 const isProduction = process.env.BUILD === 'production';
 
@@ -20,7 +22,13 @@ export default (async () => ({
   },
   plugins: [
     postcss({
-      plugins: [postcssEasyImport(), precss(), postcssPresetEnv({ stage: 3 })],
+      plugins: [
+        postcssEasyImport(),
+        stripInlineComments(),
+        precss(),
+        postcssPresetEnv({ stage: 3 })
+      ],
+      parser: syntax,
       extensions: ['.css'],
       extract: 'dist/css/main.css',
       sourceMap: true
